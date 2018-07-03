@@ -44,12 +44,12 @@ namespace Acme.Biz
                             "Quantity: " + quantity);
             if (deliverBy.HasValue)
             {
-                orderTextBuilder.Append( System.Environment.NewLine +
+                orderTextBuilder.Append(System.Environment.NewLine +
                             "Deliver By: " + deliverBy.Value.ToString("d"));
             }
             if (!String.IsNullOrWhiteSpace(instructions))
             {
-                orderTextBuilder.Append( System.Environment.NewLine +
+                orderTextBuilder.Append(System.Environment.NewLine +
                             "Instructions: " + instructions);
             }
             var orderText = orderTextBuilder.ToString();
@@ -102,6 +102,24 @@ namespace Acme.Biz
                                                         message,
                                                         this.Email);
             return confirmation;
+        }
+
+        public static List<string> SendEmail(ICollection<Vendor> vendors, string message)
+        {
+            var confirmations = new List<string>();
+            var emailService = new EmailService();
+            Console.WriteLine(vendors.Count);
+
+            foreach (var vendor in vendors)
+            {
+                var subject = "Important message for: " + vendor.CompanyName;
+                var confirmation = emailService.SendMessage(subject,
+                    message,
+                    vendor.Email);
+                confirmations.Add(confirmation);
+            }
+
+            return confirmations;
         }
     }
 }

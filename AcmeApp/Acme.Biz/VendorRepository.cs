@@ -27,7 +27,7 @@ namespace Acme.Biz
             return vendor;
         }
 
-        public List<Vendor> Retrieve()
+        public ICollection<Vendor> Retrieve()
         {
             if (vendors == null)
             {
@@ -37,46 +37,6 @@ namespace Acme.Biz
                 vendors.Add(new Vendor() { VendorId = 2, CompanyName = "XYZ Inc", Email = "xyz@xyz.com" });
             }
             Console.WriteLine(vendors);
-
-            return vendors;
-        }
-
-        public Dictionary<string, Vendor> RetrieveWithKeys()
-        {
-            var vendors = new Dictionary<string, Vendor>()
-            {
-                {"ABC Corp", new Vendor(){ VendorId = 1, CompanyName = "ABC Company", Email = "abc@abc.com" } },
-                {"XYZ Inc", new Vendor(){  VendorId = 2, CompanyName = "XYZ Company", Email = "xyz@xyz.com" } }
-            };
-
-            foreach (var element in vendors)
-            {
-                var vender = element.Value;
-                var key = element.Key;
-                Console.WriteLine($"Key : {key} Value: {vender}");
-            }
-
-            //foreach (var vendor in vendors.Values)
-            //{
-            //    Console.WriteLine(vendor);
-            //}
-
-            //foreach (var companyName in vendors.Keys)
-            //{
-            //    Console.WriteLine(vendors[companyName]);
-            //}
-
-            //Console.WriteLine(vendors["XYZ Inc"]);
-            //if (vendors.ContainsKey("XYZ"))
-            //{
-            //    Console.WriteLine(vendors["XYZ"]);
-            //}
-
-            //Vendor vendor;
-            //if (vendors.TryGetValue("XYZ", out vendor))
-            //{
-            //    Console.WriteLine(vendor);
-            //}
 
             return vendors;
         }
