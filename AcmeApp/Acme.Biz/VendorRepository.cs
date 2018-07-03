@@ -41,6 +41,18 @@ namespace Acme.Biz
             return vendors;
         }
 
+        public IEnumerable<Vendor> RetrieveWithIterator()
+        {
+            //Get the data from the database
+            this.Retrieve();
+
+            foreach (var vendor in vendors)
+            {
+                Console.WriteLine($"Vendor Id: {vendor.VendorId}");
+                yield return vendor;
+            }
+        }
+
         public T RetrieveValue<T>(string sql, T defaultValue)
         {
             // Call the database to retrieve the value
